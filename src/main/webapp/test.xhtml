@@ -11,8 +11,28 @@
     </h:head>
     <h:body>
 
-        <h1>#{testView.string}</h1>
+        <h1>#{testView.string} - armagan</h1>
         <h:form id="frmTest">
+        
+        	<p:commandButton type="button" id="myButton"
+					icon="pi pi-search" />
+            
+            <p:overlayPanel dynamic="true" appendTo="@(body)"
+				for="myButton" showEffect="fade" showCloseIcon="true">
+				
+				<p:dataTable var="customer" value="#{testView.lazyModel}" scrollable="true" liveScroll="true" scrollRows="5" rows="5"
+                     scrollHeight="280" style="overflow: auto;" lazy="true" id="customerTable">
+                     
+		            <p:column headerText="Name">
+		                <h:outputText value="#{customer.name}"/>
+		            </p:column>
+		            
+		            <p:column headerText="Country">
+		                <h:outputText value="#{customer.company}"/>
+		            </p:column>
+		        </p:dataTable>
+				
+			</p:overlayPanel>
             
         </h:form>
 
