@@ -1,0 +1,54 @@
+package org.primefaces.test;
+
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+
+import org.primefaces.model.FilterMeta;
+import org.primefaces.model.LazyDataModel;
+import org.primefaces.model.SortMeta;
+
+public class LazyCustomerDataModel extends LazyDataModel<Customer> {
+
+    private List<Customer> datasource;
+
+    public LazyCustomerDataModel(List<Customer> datasource) {
+        this.datasource = datasource;
+    }
+
+    @Override
+    public Customer getRowData(String rowKey) {
+        for (Customer customer : datasource) {
+            if (customer.getId() == Integer.parseInt(rowKey)) {
+                return customer;
+            }
+        }
+
+        return null;
+    }
+
+    @Override
+    public String getRowKey(Customer customer) {
+        return String.valueOf(customer.getId());
+    }
+
+    @Override
+    public List<Customer> load(int first, int pageSize, Map<String, SortMeta> sortBy,
+        Map<String, FilterMeta> filterBy) {
+      
+      System.out.println("in load method.. 'first' param = " + first + " 'pageSize' param = " + pageSize);
+      
+      long rowCount = datasource.stream()
+          .count();
+
+      // apply offset & filters
+      List<Customer> customers = datasource.stream()
+              .limit(pageSize)
+              .collect(Collectors.toList());
+    
+      // rowCount
+      setRowCount((int) rowCount);
+    
+      return customers;
+    }
+}
