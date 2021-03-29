@@ -1,0 +1,30 @@
+package org.primefaces.test;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.annotation.PostConstruct;
+import javax.faces.bean.ApplicationScoped;
+import javax.inject.Named;
+
+@Named
+public class CustomerService {
+
+    public List<Customer> getCustomers() {
+      List<Customer> customers = new ArrayList<>();
+
+      customers.add(new Customer(1,"Customer1", "companyA"));
+      customers.add(new Customer(2,"Customer2", "companyB"));
+      customers.add(new Customer(3,"Customer3", "companyA"));
+      customers.add(new Customer(4,"Customer4", "companyA"));
+      customers.add(new Customer(5,"Customer5", "companyB"));
+      customers.add(new Customer(6,"Customer6", "companyB"));
+      customers.add(new Customer(7,"Customer7", "companyA"));
+      customers.add(new Customer(8,"Customer8", "companyA"));
+      customers.add(new Customer(9,"Customer9", "companyB"));
+      customers.add(new Customer(10,"Customer10", "companyA"));
+      return customers;
+    }
+
+
+}
